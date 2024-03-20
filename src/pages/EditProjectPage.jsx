@@ -28,11 +28,11 @@ function EditProjectPage(props) {
       .catch((error) => console.log(error));
   }, [projectId]);
 
+// ==========CRUD-UPDATE============
   const handleFormSubmit = (e) => {
     e.preventDefault();
     // Create an object representing the body of the PUT request
     const requestBody = { title, description };
-
     // Make a PUT request to the API update the project
     axios
       .put(`${API_URL}/projects/${projectId}`, requestBody)
@@ -41,6 +41,15 @@ function EditProjectPage(props) {
         // is updated we navigate back to the Project Details page (client-side)
         navigate(`/projects/${projectId}`);
       });
+  };
+// ==========CRUD-DELETE============
+  const deleteProject = () => {
+    axios
+    .delete(`${API_URL}/projects/${projectId}`)
+    .then(() => {
+      navigate('/projects');
+    })
+    .catch((err) => console.log(err));
   };
 
   return (
@@ -64,6 +73,7 @@ function EditProjectPage(props) {
         />
 
         <button type="submit">Update Project</button>
+        <button onClick={deleteProject}>Delete Project</button>
       </form>
     </div>
   );
