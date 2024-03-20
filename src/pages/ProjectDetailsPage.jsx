@@ -3,12 +3,12 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 // import { Link } from "react-router-dom";
-
 // Get the URL parameter `:projectId`
 import { Link, useParams } from "react-router-dom";  
-const API_URL = "https://project-management-api-4641927fee65.herokuapp.com";
-
+import TaskCard from "../components/TaskCard";
 import AddTask from "../components/AddTask";
+
+const API_URL = "https://project-management-api-4641927fee65.herokuapp.com";
 
 function ProjectDetailsPage (props) {
   
@@ -44,11 +44,7 @@ function ProjectDetailsPage (props) {
   
   {project &&
         project.tasks.map((task) => (
-          <li className="TaskCard card" key={task.id}>
-            <h3>{title}</h3>
-            <h4>Description:</h4>
-            <p>{description}</p>
-          </li>
+          <TaskCard key={task.id} {...task} /> 
         ))}
 
         <Link to="/projects"><button>Back to projects</button></Link>
